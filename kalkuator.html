@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <!-- mycss -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <title>Kalkulator</title>
+  </head>
+  <body>
+    <div class="container text-center">
+        <form class="text-center">
+            <input class="form-control textinput" type="text" placeholder="0" id="hasil" readonly>
+            <input class="form-control textinput" type="text" placeholder="0" id="proses" readonly>
+        </form>
+        <div class="input-group justify-content-end">
+            <input onclick="dataclear()" class="btn btn-info float-right" type="button" value="C">
+            <input onclick="datac()" class="btn btn-info float-right" type="button" value="DEL">
+        </div>
+        <div class="input-group text-center">
+            <input onclick="datainput(1)" class="btn btn-primary" type="button" value="1">
+            <input onclick="datainput(2)" class="btn btn-primary" type="button" value="2">
+            <input onclick="datainput(3)" class="btn btn-primary" type="button" value="3">
+            <input onclick="datainput('/')" class="btn btn-info" type="button" value="/">
+        </div>
+        <div class="input-group text-center">
+            <input onclick="datainput(4)" class="btn btn-primary" type="button" value="4">
+            <input onclick="datainput(5)" class="btn btn-primary" type="button" value="5">
+            <input onclick="datainput(6)" class="btn btn-primary" type="button" value="6">
+            <input onclick="datainput('*')" class="btn btn-info" type="button" value="*">
+        </div>
+        <div class="input-group text-center">
+            <input onclick="datainput(7)" class="btn btn-primary" type="button" value="7">
+            <input onclick="datainput(8)" class="btn btn-primary" type="button" value="8">
+            <input onclick="datainput(9)" class="btn btn-primary" type="button" value="9">
+            <input onclick="datainput('-') "class="btn btn-info" type="button" value="-">
+        </div>
+        <div class="input-group text-center">
+            <input onclick="datainput('.')" class="btn btn-info" type="button" value=".">
+            <input onclick="datainput(0)" class="btn btn-primary" type="button" value="0">
+            <input onclick="dataproses()" class="btn btn-info" type="button" value="=">
+            <input onclick="datainput('+')" class="btn btn-info" type="button" value="+">
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script>
+        var operators = ['*', '/', '+', '-'];
+        function datainput(input){
+            document.getElementById("proses").value += input;
+            var nilai = document.getElementById("proses").value;
+            var cekOperator = operators.includes(input);
+            if (!cekOperator) {
+                var hasil = eval (nilai);
+                document.getElementById("hasil").value = hasil;
+            }
+        }
+        function datac(){
+            document.getElementById("proses").value = document.getElementById("proses").value.slice(0,-1);
+            var nilai = document.getElementById("proses").value;
+            var cekOperator1 = operators.includes(nilai[nilai.length -1]);
+            if(!cekOperator1){
+                var hasil = eval (nilai);
+            }
+            if (hasil != undefined){
+                document.getElementById("hasil").value = hasil;
+            }
+            else{
+                document.getElementById("hasil").value = "0";
+            }
+        }
+        function dataproses(){
+            var hasil = eval (document.getElementById("proses").value);
+            document.getElementById("hasil").value= hasil;
+        }
+
+        function dataclear(){
+            document.getElementById("hasil").value= "";
+            document.getElementById("proses").value= "";
+        }
+    </script>
+  </body>
+</html>
